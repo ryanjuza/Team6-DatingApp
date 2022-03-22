@@ -24,6 +24,110 @@ app.use(express.static("public"));
 
 app.set("view engine", "ejs");
 
+app.use(session({
+    secret: process.env.SECRET,
+    resave: false,
+    saveUninitialized: false
+}));
+
+
+app.use(passport.initialize());
+
+app.use(passport.session());
+
+
+
+mongoose.connect(process.env.MONGO_URI, {useNewUrlParser: true, useUnifiedTopology: true});
+
+const pSchema = new mongoose.Schema({
+    name: String,
+    username: String,
+    password: String,
+    gender: String
+});
+
+pSchema.plugin(passportLocalMongoose);
+
+const Profile = mongoose.model('Profile', pSchema);
+
+passport.use(Profile.createStrategy());
+
+passport.serializeUser(Profile.serializeUser());
+passport.deserializeUser(Profile.deserializeUser());
+
+
+
+const wSchema = new mongoose.Schema({
+    _id: {type: mongoose.Schema.Types.ObjectId, ref: 'pSchema'},
+    name: String,
+    username: String,
+    interests: String,
+    gender: String,
+    age: Number,
+    todo: String,
+    loc: String,
+    mgen: String,
+    fgen: String
+});
+
+
+const Wprofile = mongoose.model('Wprofile', wSchema);
+
+
+
+
+
+
+const mSchema = new mongoose.Schema({
+    _id: {type: mongoose.Schema.Types.ObjectId, ref: 'pSchema'},
+    name: String,
+    username: String,
+    interests: String,
+    gender: String,
+    age: Number,
+    todo: String,
+    loc: String,
+    mgen: String,
+    fgen: String
+});
+
+
+
+const Mprofile = mongoose.model('Mprofile', mSchema);
+
+
+
+
+
+
+
+
+const mlikeSchema = new mongoose.Schema({
+    _id: {type: mongoose.Schema.Types.ObjectId, ref: 'mSchema'},
+    women: [{wid: {type: mongoose.Schema.Types.ObjectId, ref: 'wSchema'}, seen: String, rate: Number}]
+});
+
+
+const Like = mongoose.model('Like', mlikeSchema);
+
+
+
+
+// ************ //
+
+const wlikeSchema = new mongoose.Schema({
+    _id: {type: mongoose.Schema.Types.ObjectId, ref: 'wSchema'},
+    men: [{mid: {type: mongoose.Schema.Types.ObjectId, ref: 'mSchema'}, seen: String, rate: Number}]
+});
+
+
+const Flike = mongoose.model('Flike', wlikeSchema);
+
+const mchSchema = new mongoose.Schema({
+    _id: {type: mongoose.Schema.Types.ObjectId, ref: 'mSchema'},
+    women: [{wid: {type: mongoose.Schema.Types.ObjectId, ref: 'wSchema'}, seen: String, rate: Number}]
+});
+
 
 
 
