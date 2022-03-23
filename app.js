@@ -64,7 +64,8 @@ const wSchema = new mongoose.Schema({
     interests: Array,
     gender: String,
     age: Number,
-    location: String
+    location: String,
+    gInterests: String
 });
 
 
@@ -82,7 +83,8 @@ const mSchema = new mongoose.Schema({
     interests: Array,
     gender: String,
     age: Number,
-    location: String
+    location: String,
+    gInterests: String
 });
 
 
@@ -126,8 +128,13 @@ app.get("/", function(req, res){
     res.render("register");
 });
 
+app.get("/interests", function(req, res){
+    res.render("interests");
+});
 
-
+app.post("/register", function(req, res){
+    res.redirect("/interests");
+});
 
 app.listen(3000, function(){
     console.log("Server started successfully");
