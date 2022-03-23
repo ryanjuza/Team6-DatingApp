@@ -61,13 +61,10 @@ const wSchema = new mongoose.Schema({
     _id: {type: mongoose.Schema.Types.ObjectId, ref: 'pSchema'},
     name: String,
     username: String,
-    interests: String,
+    interests: Array,
     gender: String,
     age: Number,
-    todo: String,
-    loc: String,
-    mgen: String,
-    fgen: String
+    location: String
 });
 
 
@@ -82,13 +79,10 @@ const mSchema = new mongoose.Schema({
     _id: {type: mongoose.Schema.Types.ObjectId, ref: 'pSchema'},
     name: String,
     username: String,
-    interests: String,
+    interests: Array,
     gender: String,
     age: Number,
-    todo: String,
-    loc: String,
-    mgen: String,
-    fgen: String
+    location: String
 });
 
 
