@@ -122,6 +122,10 @@ const mchSchema = new mongoose.Schema({
     women: [{wid: {type: mongoose.Schema.Types.ObjectId, ref: 'wSchema'}, seen: String, rate: Number}]
 });
 
+app.get("/", function(req, res){
+    res.render("register");
+});
+
 
 
 
