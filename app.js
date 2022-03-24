@@ -133,7 +133,67 @@ app.get("/interests", function(req, res){
 });
 
 app.post("/register", function(req, res){
-    res.redirect("/interests");
+    const fn = req.body.fname;
+    const gn = req.body.gender;
+    const age = req.body.age;
+    const genInter = req.body.ginter;
+    const un = req.body.username;
+    const loc = req.body.location
+
+
+
+    Profile.register({username: req.body.username, name: fn, gender: gn}, req.body.password, function(err, profs){
+        if (err){
+            console.log(err);
+        } else {
+            const gen = profs._id;
+            passport.authenticate("local")(req, res, function(){
+
+                if (gn == "male"){
+                    const newMp = new Mprofile({
+                        _id: gen,
+                        name: fn,
+                        username: un,
+                        gender: gn,
+                        age: age,
+                        location: loc,
+                        gInterests: genInter
+                    });
+                    newMp.save();
+                    const startLike = new Like({
+                        _id: gen
+                    });
+                    startLike.save();
+    
+    
+                }
+                
+                if(gn == "female"){
+                    const newWp = new Wprofile({
+                        _id: gen,
+                        name: fn,
+                        username: un,
+                        gender: gn,
+                        age: age,
+                        location: loc,
+                        gInterests: genInter
+                    });
+                    newWp.save();
+                    const startFlike = new Flike({
+                        _id: gen
+                    });
+                    startFlike.save();
+          
+                }
+
+                res.redirect("/interests");
+            });
+
+            
+        }
+        
+        
+    });
 });
 
 app.listen(3000, function(){
