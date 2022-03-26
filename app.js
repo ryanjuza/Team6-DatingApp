@@ -210,11 +210,32 @@ app.post("/logins", function(req, res){
             console.log(err);
         } else {
             passport.authenticate("local")(req, res, function(){
-                res.redirect("/home");
+                res.redirect("/dashboard");
             });
         }
     });
-})
+});
+
+app.post("/userAttr", function(req, res){
+    Profile.findOneAndUpdate({_id: req.user.id}, {$push: {interests: [req.body]}}, function(err, resultz){
+        Mprofile.findOneAndUpdate({_id: req.user.id}, {$push: {interests: [req.body]}}, function(err, results){
+            if(results){
+                res.redirect("/dashboard");
+            } else {
+                Wprofile.findOneAndUpdate({_id: req.user.id}, {$push: {interests: [req.body]}}, function(err, result){
+                    if(err){
+                        console.log(err);
+                    } else {
+                        res.redirect("/dashboard");
+                    }
+
+                });
+            }
+        });
+
+        
+    });
+});
 
 app.listen(3000, function(){
     console.log("Server started successfully");
