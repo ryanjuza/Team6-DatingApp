@@ -43,7 +43,11 @@ const pSchema = new mongoose.Schema({
     name: String,
     username: String,
     password: String,
-    gender: String
+    interests: Array,
+    gender: String,
+    age: Number,
+    location: String,
+    gInterests: String
 });
 
 pSchema.plugin(passportLocalMongoose);
