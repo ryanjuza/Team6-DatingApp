@@ -22,12 +22,14 @@
         <form id="Login" class="input-group">
           <input
             type="text"
+            name="username"
             class="input-field"
-            placeholder="UserId"
+            placeholder="email"
             required
           />
           <input
-            type="text"
+            type="password"
+            name="password"
             class="input-field"
             placeholder="Password"
             required
@@ -40,32 +42,37 @@
         <form action="/register" method="post" id="Register" class="input-group">
           <input
             type="text"
+            name="username"
             class="input-field"
-            placeholder="UserId/emailID"
+            placeholder="Email"
             required
           />
-          <input type="text" class="input-field" placeholder="Name" required />
+          <input type="text" name="fname" class="input-field" placeholder="Full Name" required />
           <input
             type="text"
+            name="gender"
             class="input-field"
-            placeholder="Gender"
+            placeholder="Gender - Male/Female"
             required
           />
-          <input type="text" class="input-field" placeholder="Age" required />
+          <input type="text" name="age" class="input-field" placeholder="Age" required />
           <input
             type="text"
+            name="ginter"
             class="input-field"
-            placeholder="Adventures preferred"
+            placeholder="Interested in Male/Female"
             required
           />
+          <input type="text" name="location" class="input-field" placeholder="Location - e.g. Atlanta, GA, USA" required />
           <input
-            type="text"
+            type="password"
+            name="password"
             class="input-field"
             placeholder="New password"
             required
           />
           <input
-            type="text"
+            type="password"
             class="input-field"
             placeholder="Confirm password"
             required
@@ -82,7 +89,6 @@
       const a = document.getElementById("Login");
       const b = document.getElementById("Register");
       const c = document.getElementById("btn");
-
       function Register() {
         a.style.left = "-400px";
         b.style.left = "175px";
