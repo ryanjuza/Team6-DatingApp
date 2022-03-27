@@ -131,6 +131,20 @@ app.get("/interests", function(req, res){
     res.render("interests");
 });
 
+app.get("/dashboard", function(req, res){
+
+    Profile.findById(req.user.id, function(err, results){
+        
+        const userIntrs = [];
+        for(let name in results.interests[0][0]) {
+            if (results.interests[0][0].hasOwnProperty(name)) {
+                userIntrs.push(results.interests[0][0][name]);
+            }
+        }
+        res.render("dashboard", {userNm: results.name, usergn: results.gender, userAge: results.age, userLoc: results.location, userGi: results.gInterests, userAtr: userIntrs.toString()});
+    });
+    
+});
 
 
 app.post("/register", function(req, res){
@@ -174,7 +188,7 @@ app.post("/register", function(req, res){
                     gender: gn,
                     age: age,
                     location: loc,
-                    ginterests: genInter
+                    gInterests: genInter
                 });
                 newWp.save();
                 const startFlike = new Flike({
@@ -216,7 +230,7 @@ app.post("/logins", function(req, res){
     });
 });
 
-app.post("/userAttr", function(req, res){
+app.post("/interests", function(req, res){
     Profile.findOneAndUpdate({_id: req.user.id}, {$push: {interests: [req.body]}}, function(err, resultz){
         Mprofile.findOneAndUpdate({_id: req.user.id}, {$push: {interests: [req.body]}}, function(err, results){
             if(results){

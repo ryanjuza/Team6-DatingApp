@@ -191,7 +191,7 @@ body {
 }
 .dashboard .grid-container .edit-profile h3 {
   font-size: 20px;
-  color: #363b6d;
+  color: linear-gradient(to right, #8e44ad, #ad4481);
   display: flex;
 }
 .dashboard .grid-container .edit-profile h3 i {
@@ -206,7 +206,7 @@ body {
 }
 .dashboard .grid-container .edit-profile h1 {
   margin-top: 100px;
-  color: #363b6d;
+  color: linear-gradient(to right, #8e44ad, #ad4481);
   margin-left: 20px;
 }
 .dashboard .grid-container .edit-profile .header {
@@ -229,7 +229,7 @@ body {
 }
 .dashboard .grid-container .edit-profile .header:after {
   z-index: 2;
-  background-color: #363b6d;
+  background: linear-gradient(to right, #8e44ad, #ad4481);
   width: 110%;
   transform: rotate(-20deg) skewX(0deg);
   opacity: 1;

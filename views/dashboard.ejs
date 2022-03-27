@@ -1,11 +1,10 @@
-<!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
-    <link rel="stylesheet" href="./dashboard.css" />
+    <title>Profile Dashboard</title>
+    <link rel="stylesheet" href="css/dashboard.css" />
   </head>
   <body>
     <div class="body-container">
@@ -20,27 +19,27 @@
                 src="https://images.unsplash.com/photo-1502292754603-a0891e807332?ixlib=rb-1.2.1&amp;ixid=eyJhcHBfaWQiOjEyMDd9&amp;auto=format&amp;fit=crop&amp;w=934&amp;q=80"
               />
             </div>
-            <h1>Chloe C</h1>
+            <h1><%= userNm %></h1>
             <div class="edit-infos">
               <h3>Personal information<i class="fas fa-pen"></i></h3>
               <div class="profile-data">
                 <div class="data-details">
                   <h5>Age</h5>
-                  <h4>24</h4>
+                  <h4><%= userAge %></h4>
                 </div>
                 <div class="data-details">
                   <h5>Gender</h5>
-                  <h4>Woman</h4>
+                  <h4><%= usergn %></h4>
                 </div>
                 <div class="data-details">
                   <h5>Location</h5>
-                  <h4>Paris</h4>
+                  <h4><%= userLoc %></h4>
                 </div>
               </div>
             </div>
             <div class="edit-interest">
               <h3>What are you looking for ?<i class="fas fa-pen"></i></h3>
-              <p class="p-small">Men and Women</p>
+              <p class="p-small"><%= userGi%></p>
             </div>
             <div class="edit-interest">
               <h3>Bio<i class="fas fa-pen"></i></h3>
@@ -54,10 +53,7 @@
             </div>
             <div class="edit-interest">
               <h3>Your interests <i class="fas fa-pen"></i></h3>
-              <p>
-                #traveling #cooking #summer #jazz #friends #art #walk #dogs
-                #design #architecture #photo #nature #fun
-              </p>
+              <p><%= userAtr %> </p>
             </div>
             <div class="edit-picture">
               <div class="picture">
