@@ -16,7 +16,7 @@
             </div>
             <div class="profile-picture">
               <img
-                src="https://images.unsplash.com/photo-1502292754603-a0891e807332?ixlib=rb-1.2.1&amp;ixid=eyJhcHBfaWQiOjEyMDd9&amp;auto=format&amp;fit=crop&amp;w=934&amp;q=80"
+                src="<%= userPcs %>"
               />
             </div>
             <h1><%= userNm %></h1>
@@ -56,21 +56,13 @@
               <p><%= userAtr %> </p>
             </div>
             <div class="edit-picture">
+              <% allPcs.forEach(function(item) { %>
               <div class="picture">
                 <img
-                  src="https://images.unsplash.com/photo-1540218660726-95c6764dd7ea?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=634&q=80"
+                src="<%= item %> "
                 />
               </div>
-              <div class="picture">
-                <img
-                  src="https://images.unsplash.com/photo-1467020421390-2fb2647a413e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1235&q=80"
-                />
-              </div>
-              <div class="picture">
-                <img
-                  src="https://images.unsplash.com/photo-1488751045188-3c55bbf9a3fa?ixlib=rb-1.2.1&auto=format&fit=crop&w=634&q=80"
-                />
-              </div>
+              <% }) %>
               <div class="picture-add">
                 <i class="fas fa-plus"></i>
               </div>
