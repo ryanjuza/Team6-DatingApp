@@ -311,7 +311,9 @@ app.post("/logins", function(req, res){
     });
 });
 
-
+app.get("/test", (req, res) =>  {
+    res.status(200).send("Hello world");
+  });
 
 
 app.get("/", function(req, res){
@@ -326,7 +328,7 @@ app.listen(3000, function(){
     console.log("Server started successfully");
 });
 
-
+module.exports = app;
 
 // app.post("/interests", function(req, res){
 //     Profile.findOneAndUpdate({_id: req.user.id}, {$push: {interests: [req.body]}}, function(err, resultz){
