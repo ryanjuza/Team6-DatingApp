@@ -161,6 +161,33 @@ const upload = multer({
 
 
 
+app.post("/bio", async (req, res) => {
+    const chkgn = await Profile.findById(req.user.id).exec();
+    if(chkgn.gender == "male"){
+        await Mprofile.updateOne({_id: req.user.id}, {$set: {bio: req.body.bios}}).exec();
+    } else {
+        await Wprofile.updateOne({_id: req.user.id}, {$set: {bio: req.body.bios}}).exec();
+    }
+    await Profile.updateOne({_id: req.user.id}, {$set: {bio: req.body.bios}}).exec();
+    res.redirect("/dashboard");
+});
+
+
+app.post("/rmvpic", async (req, res) => {
+    const chkgdr = await Profile.findById(req.user.id).exec();
+    if(chkgdr.gender == "male"){
+        await Mprofile.findOneAndUpdate({_id: req.user.id}, {$pull: {pics: req.body.btimg}}).exec();
+
+    } else {
+        await Wprofile.findOneAndUpdate({_id: req.user.id}, {$pull: {pics: req.body.btimg}}).exec();
+    }
+    res.redirect("/dashboard");
+});
+
+
+
+
+
 
 app.get("/dashboard", async (req, res) => {
     const profUinfo = await Profile.findById(req.user.id);
@@ -190,9 +217,149 @@ app.get("/dashboard", async (req, res) => {
 
 
 
+app.get("/male", async (req, res) => {
+    const findHisLikes = await Like.findById(req.user.id).exec();
+    const filterProf = [];
+    findHisLikes.women.forEach(function(reslt){
+        filterProf.push(reslt.wid);
+    });
+
+    const getWpro = await Wprofile.find({'_id': {$nin: filterProf}}).limit(1).exec();
+    
+
+    res.render('male', {herInfos: getWpro});
+
+});
+
+
+app.get("/female", async (req, res) => {
+
+    const findHerLikes = await Flike.findById(req.user.id).exec();
+
+    const filterMprof = [];
+    findHerLikes.men.forEach(function(reslt){
+        filterMprof.push(reslt.mid);
+    });
+
+    const getMpro = await Mprofile.find({'_id': {$nin: filterMprof}}).limit(1).exec();
+
+    res.render("female", {hisInfos: getMpro});
+});
 
 
 
+app.post("/matchm", async (req, res) => {
+    const checkA = await Profile.findById(req.user.id).exec();
+    if(checkA.gender == "male"){
+        res.redirect("/mcards");
+    } else {
+        res.redirect("/wcards");
+    }
+});
+
+
+app.post("/cards", async (req, res) => {
+
+    const vldgn = await Profile.findById(req.user.id).exec();
+    if(vldgn.gender == "male"){
+        res.redirect("/male");
+    } else {
+        res.redirect("/female");
+    }
+});
+
+
+app.post('/upimg', upload.single('imagez'), async (req, res) => {
+    const uploadedFile = req.file.location;
+
+    // const addProfPic = await Profile.updateOne({_id: req.user.id}, { $set: { pict: uploadedFile}},{upsert:true});
+    const checkGender = await Profile.findById(req.user.id).exec();
+    if(checkGender.gender == "male"){
+        await Mprofile.updateOne({_id: req.user.id}, { $set: { pict: uploadedFile}},{upsert:true}).exec();
+    } else {
+        await Wprofile.updateOne({_id: req.user.id}, { $set: { pict: uploadedFile}},{upsert:true}).exec();
+    }
+    
+    res.redirect("/dasboard");
+});
+
+
+app.post('/userpics', upload.single('userImg'), async (req, res) => {
+    const uploadedFiles = req.file.location;
+
+    const checkGenderz = await Profile.findById(req.user.id).exec();
+    if(checkGenderz.gender == "male"){
+        await Menp.findOneAndUpdate({_id: req.user.id}, {$push: {pics: uploadedFiles}}).exec();
+    } else {
+        await Womenp.findOneAndUpdate({_id: req.user.id}, {$push: {pics: uploadedFiles}}).exec();
+    }
+    res.redirect("/dashboard");
+});
+
+
+app.post("/wlikes", async (req, res) => {
+    const getZan = await Wprofile.findById(req.user.id);
+    const getMard = await Mprofile.findById(req.body.addT);
+    const femaleAt = getZan.interests[0].split(',');
+    const maleAt = getMard.interests[0].split(',');
+            
+            const common_ats = femaleAt.filter(x => maleAt.indexOf(x) !== -1);
+            if(common_ats.length > 3){
+                // let menMatchd = new Mlmatch({
+                //     mid: req.body.addT,
+                //     wid: req.user.id
+                // });
+                // menMatchd.save();
+                const mForW = await Like.findOneAndUpdate({_id: req.body.addT}, {$push: {women: [{wid: req.user.id, seen: "N", rate: common_ats.length}]}});
+            }
+            const zanLikes = await Flike.findOneAndUpdate({_id: req.user.id}, {$push: {men: [{mid: req.body.addT, seen: "N", rate: common_ats.length}]}});
+            res.redirect("/female");
+});
+
+
+app.post("/z", async (req, res) => {
+    const getMards = await Mprofile.findById(req.user.id);
+    const getZans = await Wprofile.findById(req.body.addT);
+    const mattrs = getMards.interests[0].split(',');
+    const wattrs = getZans.interests[0].split(',');
+
+            const common_atrs = mattrs.filter(x => wattrs.indexOf(x) !== -1);
+            if(common_atrs.length > 3){
+                // let femMatchd = new Womatch({
+                //     wid: req.body.addT,
+                //     mid: req.user.id
+                // });
+                // femMatchd.save();
+                const mforM = await Flike.findOneAndUpdate({_id: req.body.addT}, {$push: {men: [{mid: req.user.id, seen: "N", rate: common_atrs.length}]}});
+            }
+
+            const mardLikez = await Like.findOneAndUpdate({_id: req.user.id}, {$push: {women: [{wid: req.body.addT, seen: "N", rate: common_atrs.length}]}});
+            res.redirect("/male");
+});
+
+
+app.post("/dislike", async (req, res) => {
+    const mdsl = await Like.findOneAndUpdate({_id: req.user.id}, {$push: {women: [{wid: req.body.rejc, seen: "N", rate: 0}]}});
+    const mwdsl = await Flike.findOneAndUpdate({_id: req.body.rejc}, {$push: {men: [{mid: req.user.id, seen: "N", rate: 0}]}});
+    res.redirect("/male");
+});
+
+app.post("/wdislike", async (req, res) => {
+    const wdsl = await Flike.findOneAndUpdate({_id: req.user.id}, {$push: {men: [{mid: req.body.wrejc, seen: "N", rate: 0}]}});
+    const wmdsl = await Like.findOneAndUpdate({_id: req.body.wrejc}, {$push: {women: [{wid: req.user.id, seen: "N", rate: 0}]}});
+    res.redirect("/female");
+});
+
+
+app.post("/delete", async (req, res) => {
+    const chkg = await Profile.findById(req.user.id).exec();
+    if(chkg.gender == "male"){
+        await Mprofile.findByIdAndDelete(req.user.id).exec();
+    } else {
+        await Wprofile.findByIdAndDelete(req.user.id).exec();
+    }
+    res.redirect("/");
+});
 
 
 
@@ -318,6 +485,12 @@ app.get("/test", (req, res) =>  {
 
 app.get("/", function(req, res){
     res.render("register");
+});
+
+app.post("/logout", function(req, res){
+    req.logout();
+    res.redirect("/registerz");
+
 });
 
 app.get("/interests", function(req, res){
