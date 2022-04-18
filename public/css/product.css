@@ -1,0 +1,440 @@
+/* @import url('https://fonts.googleapis.com/css?family=Roboto:400,500,700');
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@500&display=swap"); */
+
+
+*
+{
+    -webkit-box-sizing: border-box;
+            box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+
+body
+{
+    font-family: 'Roboto', sans-serif;
+}
+a
+{
+    text-decoration: none;
+}
+
+
+
+
+
+
+.mobile {
+  display: none;
+}
+
+
+.container {
+  max-width: 1200px;
+  height: 100%;
+  margin-top: 0;
+  margin-bottom: 30px;
+  margin-left: auto;
+  margin-right: auto;
+  position: relative;
+}
+
+nav.desktop {
+  width: 100%;
+  height: 60px;
+  background: #333;
+}
+nav.desktop .container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 30px;
+}
+nav.desktop .container .logo {
+  color: #fff;
+  font-size: 1.7em;
+}
+nav.desktop .container ul {
+  display: flex;
+  list-style: none;
+}
+nav.desktop .container ul li {
+  margin-left: 160px;
+}
+nav.desktop .container ul li a {
+  color: #e9e9e9;
+  text-decoration: none;
+  font-size: 1.1em;
+}
+nav.desktop .container ul li a:hover {
+  color: #fff;
+}
+
+nav.mobile {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  height: 50px;
+  background: #333;
+  padding: 0 30px;
+}
+nav.mobile ul {
+  list-style: none;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 100%;
+  width: 100%;
+}
+nav.mobile ul li {
+  font-size: 0.7rem;
+}
+nav.mobile ul li a {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  color: #fff;
+  font-size: inherit;
+  text-decoration: none;
+}
+nav.mobile ul li a span {
+  color: #fff;
+  font-size: inherit;
+  margin-top: 4px;
+  display: block;
+}
+
+@media (max-width: 772px) {
+  .mobile {
+    display: block;
+  }
+
+  .desktop {
+    display: none;
+  }
+}
+
+
+main {
+    height: calc(100vh - 70px);
+  }
+  main .container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    margin-top: 30px;
+    
+  }
+  main .container h1 {
+    font-size: 3rem;
+    text-align: center;
+  }
+
+
+
+
+
+.product-card {
+    width: 580px;
+    position: relative;
+    box-shadow: 0 2px 7px #dfdfdf;
+    margin: 50px auto;
+    background: #fafafa;
+}
+
+.badge {
+    position: absolute;
+    left: 0;
+    top: 20px;
+    text-transform: uppercase;
+    font-size: 13px;
+    font-weight: 700;
+    background: red;
+    color: #fff;
+    padding: 3px 10px;
+}
+
+.product-tumb {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 300px;
+    padding: 10px;
+    background: #f0f0f0;
+}
+
+.product-tumb img {
+    width: 100%;
+    max-height: 100%;
+}
+
+.product-details {
+    padding: 30px;
+ 
+}
+
+.product-catagory {
+    display: block;
+    font-size: 12px;
+    font-weight: 700;
+    text-transform: uppercase;
+    color: #ccc;
+    margin-bottom: 18px;
+}
+
+.product-details h4 a {
+    font-weight: 500;
+    display: block;
+    margin-bottom: 18px;
+    text-transform: uppercase;
+    color: #363636;
+    text-decoration: none;
+    transition: 0.3s;
+}
+
+.product-details h4 a:hover {
+    color: #fbb72c;
+}
+
+.product-details p {
+    font-size: 15px;
+    line-height: 22px;
+    margin-bottom: 18px;
+    color: #999;
+}
+
+.product-bottom-details {
+    overflow: hidden;
+    border-top: 1px solid rgb(62, 30, 30);
+    background-color: #363b6d;
+    padding-top: 30px;
+    padding-bottom: 30px;
+}
+
+.product-bottom-details div {
+    float: left;
+    width: 50%;
+}
+
+/* .product-price {
+    font-size: 18px;
+    color: #fbb72c;
+    font-weight: 600;
+} */
+
+/* .product-price small {
+    font-size: 80%;
+    font-weight: 400;
+    text-decoration: line-through;
+    display: inline-block;
+    margin-right: 5px;
+} */
+
+.abb{
+    float: right;
+    right: 0;
+    font-family:'Times New Roman', serif;
+    font-size:20px;
+ 
+    letter-spacing:2px;
+    line-height:0px;
+    color:#ffffff;
+    border-radius:3px;
+    background-color:#0d5115;
+    padding:12px;
+    cursor: pointer;
+}
+
+.bab{
+    float: left;
+    left: 0;
+    font-family:'Times New Roman', serif;
+    font-size:20px;
+
+    letter-spacing:2px;
+    line-height:0px;
+    color:#ffffff;
+    border-radius:3px;
+    background-color:#750c0c;
+    padding:12px;
+    cursor: pointer;
+}
+.butonsz{
+  margin-bottom: 60px;
+}
+
+
+
+table, th{
+  border: none;
+  border-collapse: collapse;
+  margin-bottom: 10px;
+}
+th {
+  padding-top: 50px;
+  padding-bottom: 6px;
+  padding-left: 40px;
+  padding-right: 20px;
+}
+
+
+.bn{
+  font-family:'Times New Roman', serif;
+  font-size:20px;
+  font-variant:small-caps;
+  letter-spacing:2px;
+  line-height:0px;
+  color:#ffffff;
+  border-radius:3px;
+  background-color:#7e275b;
+  padding:16px;
+  cursor: pointer;
+}
+
+.product-links {
+    text-align: center;
+}
+
+.product-links a {
+    display: inline-block;
+    margin: auto;
+    color: #e1e1e1;
+    transition: 0.3s;
+    font-size: 17px;
+}
+
+.product-links a:hover {
+    color: #fbb72c;
+}
+
+
+label{cursor: pointer;}
+
+/* Contenedor para centrar */
+.ContainerCenter{
+display: flex;
+align-items: center;
+flex-direction: column;
+
+}
+/* Input */
+input{display: none}
+
+
+
+/* Slider */
+.Carrusels{
+height: 300px;
+width: 560px;
+position: relative;
+overflow-x: hidden;
+
+}
+.Carrusel{
+height: 100%;
+width: 100%;
+position: absolute;
+background-size: cover;
+transition: all .5s ease;
+
+}
+/* Configuracion de elementos individuales */
+/* .Carrusels .Carrusel:nth-child(1) {background-image: url(https://unsplash.it/500/300/);}
+.Carrusels .Carrusel:nth-child(2) {background-image: url(https://unsplash.it/501/301/);}
+.Carrusels .Carrusel:nth-child(3) {background-image: url(https://unsplash.it/502/302/);} */
+/* Estado 1 */
+#Slider1:checked ~ .Carrusels .Carrusel:nth-of-type(1) {transform: translate(0%, 0);}
+#Slider1:checked ~ .Carrusels .Carrusel:nth-of-type(2) {transform: translate(100%, 0);}
+#Slider1:checked ~ .Carrusels .Carrusel:nth-of-type(3) {transform: translate(200%, 0);}
+/* Estado 2 */
+#Slider2:checked ~ .Carrusels .Carrusel:nth-of-type(1) {transform: translate(-100%, 0);}
+#Slider2:checked ~ .Carrusels .Carrusel:nth-of-type(2) {transform: translate(0%, 0);}
+#Slider2:checked ~ .Carrusels .Carrusel:nth-of-type(3) {transform: translate(100%, 0);}
+/* Estado 3 */
+#Slider3:checked ~ .Carrusels .Carrusel:nth-of-type(1) {transform: translate(-200%, 0);}
+#Slider3:checked ~ .Carrusels .Carrusel:nth-of-type(2) {transform: translate(-100%, 0);}
+#Slider3:checked ~ .Carrusels .Carrusel:nth-of-type(3) {transform: translate(0%, 0);}
+
+
+/* Flechas */
+.Carrusels .ArrowLeft, .Carrusels .ArrowRight{
+position: absolute;
+height: 100%;
+width: 2em;
+align-items: center;
+justify-content: center;
+display: none;
+user-select: none;
+
+}
+.Carrusels .ArrowLeft{left: 0px;}
+.Carrusels .ArrowRight{right: 0px;}
+/* Configuracion de flechas individuales */
+#Slider1:checked ~ .Carrusels .Arrow1{display: flex;}
+#Slider2:checked ~ .Carrusels .Arrow2{display: flex;}
+#Slider3:checked ~ .Carrusels .Arrow3{display: flex;}
+
+
+/* Selectores */
+.Selectors {
+width: 60px;
+padding: 15px;
+display: flex;
+justify-content: space-between;
+}
+.Selectors .Selector {
+background-color: #FFF;
+height: 10px;
+width: 10px;
+display: block;
+border-radius: 5px;
+}
+/* Condicionales para botón inferior */
+#Slider1:checked ~ .Selectors .Selector:nth-of-type(1) {background-color: #999999;}
+#Slider2:checked ~ .Selectors .Selector:nth-of-type(2) {background-color: #999999;}
+#Slider3:checked ~ .Selectors .Selector:nth-of-type(3) {background-color: #999999;}
+
+
+
+
+
+.edit-infos {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+    margin-left: 93px;
+    margin-bottom: 21px;
+    margin-top: 7px;
+    width: 100%;
+  }
+.edit-infos .profile-data {
+    width: 400px;
+    display: flex;
+  }
+    .edit-infos
+    .profile-data
+    .data-details {
+      text-align: center;
+    margin-right: 55px;
+  }
+
+  
+
+    .edit-infos
+    .profile-data
+    .data-details
+    h5 {
+    position: initial;
+    margin-bottom: 4px;
+  }
+    .edit-infos
+    .profile-data
+    .data-details
+    h4 {
+    font-size: 20px;
+    color: #363b6d;
+    font-weight: normal;
+  }
