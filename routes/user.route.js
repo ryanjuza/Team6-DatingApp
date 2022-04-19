@@ -12,4 +12,16 @@ router
   .put(controller.updateUser)
   .delete(controller.deleteUser);
 
+router
+  .route("/home/:id")
+  .get(controller.getUserInfo);
+
+router
+  .route("/userAttr/:id")
+  .post(controller.addAtrr);
+
+router
+  .route("/bio/:id")
+  .post(controller.addBio);
+
 module.exports = router;
