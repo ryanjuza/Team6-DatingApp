@@ -209,7 +209,7 @@ app.get("/dashboard", async (req, res) => {
         });
     }
 
-        res.render("dashboard", {userNm: profUinfo.name, usergn: profUinfo.gender, userAge: profUinfo.age, userLoc: profUinfo.location, userGi: profUinfo.ginterests, userPcs: mainPic[0], allPcs: profpz, userAtr: profUinfo.interests});
+        res.render("dashboard", {userNm: profUinfo.name, usergn: profUinfo.gender, userAge: profUinfo.age, userLoc: profUinfo.location, userGi: profUinfo.gInterests, userPcs: mainPic[0], allPcs: profpz, userAtr: profUinfo.interests});
 
     
 });
@@ -384,6 +384,91 @@ app.post("/interests", async (req, res) => {
 });
 
 
+app.get("/mcards", async (req, res) => {
+    const findHisLikess = await Like.findById(req.user.id).exec();
+    
+    const addLowRates = [];
+    const addHighRates = [];
+    findHisLikess.women.forEach(function(zan){
+        if(zan.rate >= 3){
+            addHighRates.push(zan.wid);
+        } 
+        if(zan.rate <= 3 && zan.rate > 0) {
+            addLowRates.push(zan.wid);
+        }
+    });
+    const filterProfs = [];
+    findHisLikess.women.forEach(function(reslt){
+        filterProfs.push(reslt.wid);
+    });
+    
+    
+    const lwRates = await Flike.find({'_id': {$in: addLowRates}}).exec();
+    // console.log(lwRate);
+
+    const addLfzs = [];
+    
+        lwRates.forEach(function(results){
+            results.men.forEach(function(item){
+                if(item.mid == req.user.id){
+                    addLfzs.push(results._id);
+                }
+            });
+
+        });
+
+    const arrayzs = addLfzs.concat(addHighRates);
+    const getMatchInfoss = await Wprofile.find({'_id': {$in: arrayzs}}).exec();
+    
+    
+    res.render('mcards', {matchInf: getMatchInfoss});
+
+
+    // res.render('mcards');
+});
+
+
+
+app.get("/wcards", async (req, res) => {
+
+
+    const findHerLikess = await Flike.findById(req.user.id).exec();
+
+    const addLmRates = [];
+    const addHmRates = [];
+    findHerLikess.men.forEach(function(mard){
+        if(mard.rate >= 3){
+            addHmRates.push(mard.mid);
+        } 
+        if(mard.rate <= 3 && mard.rate > 0) {
+            addLmRates.push(mard.mid);
+        }
+    });
+
+    const filterMprofs = [];
+    findHerLikess.men.forEach(function(reslt){
+        filterMprofs.push(reslt.mid);
+    });
+
+    const lmRates = await Like.find({'_id': {$in: addLmRates}});
+    // console.log(lmRate);
+
+    const addLmzs = [];
+    
+        lmRates.forEach(function(results){
+            results.women.forEach(function(item){
+                if(item.wid == req.user.id){
+                    addLmzs.push(results._id);
+                }
+            });
+
+        });
+    const arrayzms = addLmzs.concat(addHmRates);
+
+    const getMatchInfoms = await Mprofile.find({'_id': {$in: arrayzms}}).exec();
+
+    res.render("wcards", {matchInf: getMatchInfoms});
+});
 
 
 
@@ -394,7 +479,7 @@ app.post("/register", function(req, res){
     const age = req.body.age;
     const genInter = req.body.ginter;
     const un = req.body.username;
-    const loc = req.body.location
+    const loc = req.body.location;
 
 
     Profile.register({username: req.body.username, name: fn, gender: gn, age: age, location: loc, gInterests: genInter}, req.body.password, function(err, profs){
