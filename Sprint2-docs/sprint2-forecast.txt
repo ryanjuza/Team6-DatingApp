@@ -1,0 +1,3 @@
+Rationale for story points forecast:
+
+We have completed one sprint so far. Typically, we would take the average of the  story points completed in our sprints and use that as our sprint velocity. But, with only one sprint completed yet, we will have to use that sprint's story point completion to estimate what we should be able to complete for this sprint. So we forecast 7 story points this sprint.
