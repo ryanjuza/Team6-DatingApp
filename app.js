@@ -471,7 +471,9 @@ app.get("/wcards", async (req, res) => {
 });
 
 
-
+app.post("/hom", async (req, res) => {
+    res.redirect("/dashboard");
+});
 
 app.post("/register", function(req, res){
     const fn = req.body.fname;
@@ -540,6 +542,7 @@ app.post("/register", function(req, res){
 
 
 app.post("/logins", function(req, res){
+
     const newProfs = new Profile({
         username: req.body.username,
         password: req.body.password
