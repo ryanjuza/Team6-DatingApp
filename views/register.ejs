@@ -19,7 +19,7 @@
           <img src="images/fb.png" />
           <img src="images/google.png" />
         </div>
-        <form action="/logins" method="post" id="Login" class="input-group">
+        <form action="/login" method="post" id="Login" class="input-group">
           <input
             type="text"
             name="username"
@@ -48,21 +48,17 @@
             required
           />
           <input type="text" name="fname" class="input-field" placeholder="Full Name" required />
-          <input
-            type="text"
-            name="gender"
-            class="input-field"
-            placeholder="Gender - Male/Female"
-            required
-          />
+          <select name="gender" class="input-field">
+            <option>Gender:</option>
+            <option value="male">Male</option>
+            <option value="female">Female</option>
+        </select>
           <input type="text" name="age" class="input-field" placeholder="Age" required />
-          <input
-            type="text"
-            name="ginter"
-            class="input-field"
-            placeholder="Interested in Male/Female"
-            required
-          />
+          <select name="ginter" class="input-field">
+            <option>Interested In</option>
+              <option value="male">Male</option>
+              <option value="female">Female</option>
+          </select>
           <input type="text" name="location" class="input-field" placeholder="Location - e.g. Atlanta, GA, USA" required />
           <input
             type="password"
