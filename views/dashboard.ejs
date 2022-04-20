@@ -1,75 +1,294 @@
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Profile Dashboard</title>
-    <link rel="stylesheet" href="css/dashboard.css" />
-  </head>
-  <body>
-    <div class="body-container">
-      <div class="dashboard">
-        <div class="grid-container">
-          <div class="edit-profile grid-area">
-            <div class="header">
-              <h1>Edit your profile</h1>
+
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Dashboard</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+    <link rel="stylesheet" type="text/css" media="screen" href="css/dashboard.css" />
+</head>
+
+<body>
+
+<!-- Overlay for fixed sidebar -->
+<div class="sidebar-overlay"></div>
+
+<!-- Material sidebar -->
+<aside id="sidebar" class="sidebar sidebar-default open" role="navigation">
+    <!-- Sidebar header -->
+    <img class="sidebar-header header-cover" src="<%= userPcs %> " style="width:100%;">
+      <!-- Top bar -->
+
+
+
+      
+
+
+  <!-- Sidebar navigation -->
+  <div class="dvib">
+    
+  
+    <form action="/upimg" method="post" enctype="multipart/form-data">
+      <table>
+        <tr>
+          <td>
+            <button class="btna" type="submit" onchange="this.form.submit()">Upload</button>
+          </td>
+          <td>
+            <input type="file" name="imagez">
+          </td>
+        </tr>
+      </table>
+      
+      
+    </form>
+    
+  </div>
+<br>
+  <ul class="nav sidebar-nav">
+      <li class="dropdown">
+          <ul id="settings-dropdown" class="dropdown-menu">
+              <li>
+                <form action="/main" method="post">
+                  <button class="button-solid" type="submit" tabindex="-1">
+                    Home
+                </button>
+                </form>
+              </li>
+              <li>
+                <form action="/cards" method="post">
+                  <button class="button-solid" type="submit" tabindex="-1">
+                    Profiles
+                </button>
+                </form>
+
+              </li>
+              <li>
+                <form action="/matchm" method="post">
+                  <button class="button-solid" type="submit" tabindex="-1">
+                    Matches
+                </button>
+                </form>
+
+              </li>
+
+              <li>
+                <form action="/logout" method="post">
+                  <button class="button-solid" type="submit">
+                    Profiles
+                </button>
+                </form>
+            </li>
+          </ul>
+      </li>
+      <li>
+        <form action="/main" method="post">
+          <button class="button-solid" type="submit">
+            Home
+        </button>
+        </form>
+      </li>
+      <li>
+        <form action="/cards" method="post">
+          <button class="button-solid" type="submit">
+            Profiles
+        </button>
+        </form>
+      </li>
+      <li>
+        <form action="/matchm" method="post">
+          <button class="button-solid" type="submit">
+            Matches
+        </button>
+        </form>
+      </li>
+      <li>
+        <form action="/logout" method="post">
+          <button class="button-solid" type="submit">
+            Logout
+        </button>
+        </form>
+    </li>
+      <li class="divider"></li>
+
+      <li>
+          <a href="#">
+              Contact Us
+              <!-- <span class="sidebar-badge">456</span> -->
+          </a>
+      </li>
+      <li>
+        <a href="#">
+            Delete Account
+            <!-- <span class="sidebar-badge">3</span> -->
+        </a>
+    </li>
+
+  </ul>
+
+</aside>
+
+<div class="wrapper">
+    <!-- Sidebar Constructor -->
+    <div class="constructor">
+        
+
+        <div class="edit-infos">
+          <h3>Hello <%= userNm %></h3>
+          <div class="profile-data">
+            <div class="data-details">
+              <h5>Age</h5>
+              <h4><%= userAge %></h4>
             </div>
-            <div class="profile-picture">
-              <img
-                src="<%= userPcs %>"
-              />
+            <div class="data-details">
+              <h5>Gender</h5>
+              <h4><%= usergn %></h4>
             </div>
-            <h1><%= userNm %></h1>
-            <div class="edit-infos">
-              <h3>Personal information<i class="fas fa-pen"></i></h3>
-              <div class="profile-data">
-                <div class="data-details">
-                  <h5>Age</h5>
-                  <h4><%= userAge %></h4>
-                </div>
-                <div class="data-details">
-                  <h5>Gender</h5>
-                  <h4><%= usergn %></h4>
-                </div>
-                <div class="data-details">
-                  <h5>Location</h5>
-                  <h4><%= userLoc %></h4>
-                </div>
-              </div>
-            </div>
-            <div class="edit-interest">
-              <h3>What are you looking for ?<i class="fas fa-pen"></i></h3>
-              <p class="p-small"><%= userGi%></p>
-            </div>
-            <div class="edit-interest">
-              <h3>Bio<i class="fas fa-pen"></i></h3>
-              <p>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi
-                aliquam leo eu sapien tristique, eu efficitur mi ornare. Aliquam
-                erat volutpat. Pellentesque rhoncus volutpat laoreet.Aliquam
-                erat volutpat. Pellentesque rhoncus volutpat laoreet.Aliquam
-                erat volutpat. Pellentesque rhoncus volutpat laoreet.
-              </p>
-            </div>
-            <div class="edit-interest">
-              <h3>Your interests <i class="fas fa-pen"></i></h3>
-              <p><%= userAtr %> </p>
-            </div>
-            <div class="edit-picture">
-              <% allPcs.forEach(function(item) { %>
-              <div class="picture">
-                <img
-                src="<%= item %> "
-                />
-              </div>
-              <% }) %>
-              <div class="picture-add">
-                <i class="fas fa-plus"></i>
-              </div>
+            <div class="data-details">
+              <h5>Location</h5>
+              <h4><%= userLoc %></h4>
             </div>
           </div>
         </div>
-      </div>
+
+        <div class="edit-interest">
+          <h3>What are you looking for ?<i class="fas fa-pen"></i></h3>
+          <p class="p-small"><%= userGi %></p>
+        </div>
+        <div class="edit-interest">
+          <h3>Bio<i class="fas fa-pen"></i></h3>
+          <form action="/bio" method="post">
+          <input name="bios" id="inp2" type="text" placeholder="Add Bio" hidden>
+          
+            <button id="bt4" onchange="this.form.submit()" hidden>Save</button>
+          </form>
+          
+ 
+            <p id="bp"><%= userBio %> </p>
+   
+          <button class="button-42" id="bt2">Edit</button>
+
+          
+        </div>
+        <div class="edit-interest">
+          <h3>Your interests <i class="fas fa-pen"></i></h3>
+          <p><%= userAtr %> </p>
+        </div>
+
+        <hr />
+        <h2 class="headline" style="text-align: center; margin-bottom: 50px;">Sidebar Constructor</h2>
+        
+        <form action="/userpics" method="post" enctype="multipart/form-data">
+          <input type="file" name="userImg"/>
+          <button class="button_plus" type="submit" onchange="this.form.submit()"></button>
+        </form>
+        
+        <br><br><br>
+
+        <div class="edit-picture">
+          <% allPcs.forEach(function(item) { %>
+          <figure class="snip1418"><img src="<%= item %>" alt="sample85"/>
+            <figcaption>
+              <form action="/rmvpic" method="post">
+                <button class="btnbs" type="submit" name="btimg" value="<%= item %>" onchange="this.form.submit()">Remove</button>
+              </form>
+              
+  
+            </figcaption>
+          </figure>
+          <% }) %>
+        </div>
+        <p><button class="sidebar-toggle">Toggle sidebar</button></p>
     </div>
-  </body>
-</html>
+</div>
+<script>
+
+$(document).ready(function() {
+  var overlay = $('.sidebar-overlay');
+
+  $('.sidebar-toggle').on('click', function() {
+      var sidebar = $('#sidebar');
+      sidebar.toggleClass('open');
+      if ((sidebar.hasClass('sidebar-fixed-left') || sidebar.hasClass('sidebar-fixed-right')) && sidebar.hasClass('open')) {
+          overlay.addClass('active');
+      } else {
+          overlay.removeClass('active');
+      }
+  });
+
+  overlay.on('click', function() {
+      $(this).removeClass('active');
+      $('#sidebar').removeClass('open');
+  });
+
+});
+
+// Sidebar constructor
+//
+// -------------------
+$(document).ready(function() {
+
+  var sidebar = $('#sidebar');
+  var sidebarHeader = $('#sidebar .sidebar-header');
+  var sidebarImg = sidebarHeader.css('background-image');
+  var toggleButtons = $('.sidebar-toggle');
+
+  // Hide toggle buttons on default position
+  toggleButtons.css('display', 'none');
+  $('body').css('display', 'table');
+
+
+  // Sidebar position
+  $('#sidebar-position').change(function() {
+      var value = $( this ).val();
+      sidebar.removeClass('sidebar-fixed-left sidebar-fixed-right sidebar-stacked').addClass(value).addClass('open');
+      if (value == 'sidebar-fixed-left' || value == 'sidebar-fixed-right') {
+          $('.sidebar-overlay').addClass('active');
+      }
+      // Show toggle buttons
+      if (value != '') {
+          toggleButtons.css('display', 'initial');
+          $('body').css('display', 'initial');
+      } else {
+          // Hide toggle buttons
+          toggleButtons.css('display', 'none');
+          $('body').css('display', 'table');
+      }
+  });
+
+  // Sidebar theme
+  $('#sidebar-theme').change(function() {
+      var value = $( this ).val();
+      sidebar.removeClass('sidebar-default sidebar-inverse sidebar-colored sidebar-colored-inverse').addClass(value)
+  });
+
+  // Header cover
+  $('#sidebar-header').change(function() {
+      var value = $(this).val();
+
+      $('.sidebar-header').removeClass('header-cover').addClass(value);
+
+      if (value == 'header-cover') {
+          sidebarHeader.css('background-image', sidebarImg)
+      } else {
+          sidebarHeader.css('background-image', '')
+      }
+  });
+});
+
+
+
+$("#bt2").click(() => {
+  $('#bp').hide()
+  $('#bt2').hide()
+  $('#inp2').show()
+  $('#bt4').show()
+  
+})
+</script>
+</body>
+
+</html> 

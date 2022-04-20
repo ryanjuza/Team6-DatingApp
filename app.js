@@ -59,6 +59,7 @@ const pSchema = new mongoose.Schema({
     location: String,
     gInterests: String,
     pict: String,
+    pics: Array,
     bio: String
 });
 
@@ -83,7 +84,7 @@ const wSchema = new mongoose.Schema({
     location: String,
     gInterests: String,
     pict: String,
-    pics: String,
+    pics: Array,
     bio: String
 });
 
@@ -105,7 +106,7 @@ const mSchema = new mongoose.Schema({
     location: String,
     gInterests: String,
     pict: String,
-    pics: String,
+    pics: Array,
     bio: String
 });
 
@@ -209,7 +210,7 @@ app.get("/dashboard", async (req, res) => {
         });
     }
 
-        res.render("dashboard", {userNm: profUinfo.name, usergn: profUinfo.gender, userAge: profUinfo.age, userLoc: profUinfo.location, userGi: profUinfo.gInterests, userPcs: mainPic[0], allPcs: profpz, userAtr: profUinfo.interests});
+        res.render("dashboard", {userNm: profUinfo.name, usergn: profUinfo.gender, userAge: profUinfo.age, userLoc: profUinfo.location, userGi: profUinfo.gInterests, userPcs: mainPic[0], allPcs: profpz, userAtr: profUinfo.interests, userBio: profUinfo.bio});
 
     
 });
@@ -273,25 +274,25 @@ app.post('/upimg', upload.single('imagez'), async (req, res) => {
     const uploadedFile = req.file.location;
 
     // const addProfPic = await Profile.updateOne({_id: req.user.id}, { $set: { pict: uploadedFile}},{upsert:true});
-    const checkGender = await Profile.findById(req.user.id).exec();
-    if(checkGender.gender == "male"){
+    const checkForGdr = await Profile.findById(req.user.id).exec();
+    if(checkForGdr.gender == "male"){
         await Mprofile.updateOne({_id: req.user.id}, { $set: { pict: uploadedFile}},{upsert:true}).exec();
     } else {
         await Wprofile.updateOne({_id: req.user.id}, { $set: { pict: uploadedFile}},{upsert:true}).exec();
     }
     
-    res.redirect("/dasboard");
+    res.redirect("/dashboard");
 });
 
 
 app.post('/userpics', upload.single('userImg'), async (req, res) => {
     const uploadedFiles = req.file.location;
 
-    const checkGenderz = await Profile.findById(req.user.id).exec();
-    if(checkGenderz.gender == "male"){
-        await Menp.findOneAndUpdate({_id: req.user.id}, {$push: {pics: uploadedFiles}}).exec();
+    const checkForGdrs = await Profile.findById(req.user.id).exec();
+    if(checkForGdrs.gender == "male"){
+        await Mprofile.findOneAndUpdate({_id: req.user.id}, {$push: {pics: uploadedFiles}}).exec();
     } else {
-        await Womenp.findOneAndUpdate({_id: req.user.id}, {$push: {pics: uploadedFiles}}).exec();
+        await Wprofile.findOneAndUpdate({_id: req.user.id}, {$push: {pics: uploadedFiles}}).exec();
     }
     res.redirect("/dashboard");
 });
@@ -541,7 +542,7 @@ app.post("/register", function(req, res){
 });
 
 
-app.post("/logins", function(req, res){
+app.post("/login", function(req, res){
 
     const newProfs = new Profile({
         username: req.body.username,
@@ -577,7 +578,7 @@ app.get("/", function(req, res){
 
 app.post("/logout", function(req, res){
     req.logout();
-    res.redirect("/registerz");
+    res.redirect("/");
 
 });
 
