@@ -13,6 +13,9 @@
   },
   "author": "Team6",
   "license": "ISC",
+  "engines": {
+    "node": "14.17.3"
+  },
   "bugs": {
     "url": "https://github.com/ryanjuza/Team6-DatingApp/issues"
   },
