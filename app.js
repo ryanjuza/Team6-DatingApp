@@ -190,6 +190,101 @@ io.on('connection', (socket)=>{
 
 
 
+app.post("/addchat", async (req, res) => {
+    const chekgdsz = await Profile.findById(req.user.id).exec();
+
+    if(chekgdsz.gender == "male"){
+        await Chat.findOneAndUpdate({room: req.body.chatId}, {$push: {msg: req.body.mesg}}).exec();
+    } else {
+        await Wchat.findOneAndUpdate({room: req.body.chatId}, {$push: {wmsg: req.body.mesg}}).exec();
+    }
+
+    
+
+
+    
+});
+
+
+app.get('/chatting', async (req, res) =>{
+    const umId = req.user.id.toString();
+    const uwId = req.query.wid.toString();
+    let mroomIds = '';
+    let wroomIds = '';
+    const arrz = [];
+    const warrz = [];
+
+
+    const chagain = await Profile.findById(req.user.id).exec();
+    if(chagain.gender == "male"){
+        mroomIds += umId + uwId;
+        wroomIds += umId + uwId;
+        const vrfChat = await Chat.find({room: mroomIds}).exec();
+        if(vrfChat.length == 0){
+
+            const addNewChat = new Chat({
+                mid: req.user.id,
+                room: mroomIds
+            });
+            addNewChat.save();
+
+            const newWchat = new Wchat({
+                wid: req.query.wid,
+                room: wroomIds
+            });
+            newWchat.save();
+            arrz.push("Hello");
+            warrz.push("Hello");
+
+        } else {
+            const vrfChatw = await Wchat.find({room: wroomIds}).exec();
+            vrfChat[0].msg.forEach(function(item){
+                arrz.push(item);
+            });
+            vrfChatw[0].wmsg.forEach(function(items){
+                warrz.push(items);
+            });
+        }
+    } else {
+        mroomIds += uwId + umId;
+        wroomIds += uwId + umId;
+        const vrfChats = await Wchat.find({room: mroomIds}).exec();
+        if(vrfChats.length == 0){
+            const addNewChats = new Chat({
+                mid: req.query.wid,
+                room: mroomIds
+            });
+            addNewChats.save();
+
+            const newWchats = new Wchat({
+                wid: req.user.id,
+                room: wroomIds
+            });
+            newWchats.save();
+            arrz.push("Hello");
+            warrz.push("Hello");
+        } else {
+            const vrfChatws = await Chat.find({room: wroomIds}).exec();
+            vrfChats[0].wmsg.forEach(function(itemz){
+                arrz.push(itemz);
+            });
+            vrfChatws[0].msg.forEach(function(itemsz){
+                warrz.push(itemsz);
+            });
+        }
+        
+    }
+
+        
+        res.render('chatting', {roomNum: mroomIds, urChat: arrz, tgChat: warrz, usrName: chagain.name});
+
+
+    
+});
+
+
+
+
 app.post("/bio", async (req, res) => {
     const chkgn = await Profile.findById(req.user.id).exec();
     if(chkgn.gender == "male"){
