@@ -16,11 +16,9 @@ const uuid = require('uuid').v4;
 const multer = require('multer');
 const Aws = require('aws-sdk');
 const multerS3 = require("multer-s3");
-
-
-
 const app = express();
-
+const server = require('http').createServer(app);
+const io = require('socket.io')(server);
 
 
 app.use(express.urlencoded({extended: true}));
@@ -142,6 +140,25 @@ const mchSchema = new mongoose.Schema({
     women: [{wid: {type: mongoose.Schema.Types.ObjectId, ref: 'wSchema'}, seen: String, rate: Number}]
 });
 
+const chatSchema = new mongoose.Schema({
+    mid: {type: mongoose.Schema.Types.ObjectId, ref: 'mSchema'},
+    wid: {type: mongoose.Schema.Types.ObjectId, ref: 'wchema'},
+    room: String,
+    msg: []
+
+});
+
+const Chat = mongoose.model('Chat', chatSchema);
+
+const wchatSchema = new mongoose.Schema({
+    wid: {type: mongoose.Schema.Types.ObjectId, ref: 'wSchema'},
+    mid: {type: mongoose.Schema.Types.ObjectId, ref: 'mSchema'},
+    room: String,
+    wmsg: []
+
+});
+
+const Wchat = mongoose.model('Wchat', wchatSchema);
 
 
 const upload = multer({
@@ -159,6 +176,17 @@ const upload = multer({
     })
 });
 
+
+io.on('connection', (socket)=>{
+    console.log("a user connected via socket!");
+    socket.on('disconnect', ()=>{
+        console.log("a user disconnected!");
+    });
+    socket.on('chat message', async (msg) => {
+        console.log("Message: " + msg);
+        io.emit('chat message', msg);
+    });
+});
 
 
 
@@ -542,6 +570,11 @@ app.post("/register", function(req, res){
 });
 
 
+app.get("/bl", async (req, res) => {
+    const tryitt = await Mprofile.findById(req.user.id).exec();
+    console.log(tryitt._id.toString().slice(0,3));
+});
+
 app.post("/login", function(req, res){
 
     const newProfs = new Profile({
@@ -586,7 +619,7 @@ app.get("/interests", function(req, res){
     res.render("interests");
 });
 
-app.listen(process.env.PORT || 3000, function(){
+server.listen(process.env.PORT || 3000, function(){
     console.log("Server started successfully");
 });
 
