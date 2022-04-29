@@ -183,8 +183,8 @@ io.on('connection', (socket)=>{
         console.log("a user disconnected!");
     });
     socket.on('chat message', async (msg) => {
-        console.log("Message: " + msg);
-        io.emit('chat message', msg);
+        console.log("Message: " + msg.name);
+        io.emit('chat message', {name: msg.name, chat: msg.chat});
     });
 });
 
