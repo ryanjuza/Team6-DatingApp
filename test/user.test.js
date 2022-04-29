@@ -1,7 +1,7 @@
 require('dotenv').config();
 const expect = require("chai").expect;
 const request = require("supertest");
-const { Profile, Male, Female } = require("../models/user.model");
+const { Profile, Male, Female, Malike, Wolike } = require("../models/user.model");
 const app = require("../app");
 const mongoose = require('mongoose');
 // const config = require('../config');
@@ -489,5 +489,662 @@ describe("api/profiles", () => {
 
 
   });
+
+
+
+  describe("POST /matchR", () => {
+    it("Should check whether female user is a match for male user", async () => {
+
+      const userrre = new Male({
+        name: "Brad",
+        username: "brad@gmail.com",
+        password: "123",
+        gender: "male",
+        age: 23,
+        location: "georgia",
+        ginterests: "female",
+        interests: ['clubing', 'hiking', 'rap', 'comedy']
+      });
+      await userrre.save();
+
+      const wuserrre = new Female({
+        name: "Emma",
+        username: "emma@gmail.com",
+        password: "123",
+        gender: "female",
+        age: 23,
+        location: "georgia",
+        ginterests: "male",
+        interests: ['clubing', 'hiking', 'rap', 'comedy']
+      });
+      await wuserrre.save();
+
+      const mlke = new Malike({
+        _id: userrre._id
+      });
+      await mlke.save();
+
+      const wlke = new Wolike({
+        _id: wuserrre._id
+      });
+      await wlke.save();
+
+      const res = await request(app)
+        .post("/api/profiles/matchR")
+        .send({
+          mid: userrre._id,
+          wid: wuserrre._id
+        });
+      const data = res.body;
+      expect(res.status).to.equal(200);
+      expect(data).to.have.property("msg", "Match");
+    });
+
+
+    it("Should return error if id is not objectid", async () => {
+
+      const userrrs = new Male({
+        name: "Brad",
+        username: "brad@gmail.com",
+        password: "123",
+        gender: "male",
+        age: 23,
+        location: "georgia",
+        ginterests: "female",
+        interests: ['clubing', 'hiking', 'rap', 'comedy']
+      });
+      await userrrs.save();
+
+      const wuserrrs = new Female({
+        name: "Emma",
+        username: "emma@gmail.com",
+        password: "123",
+        gender: "female",
+        age: 23,
+        location: "georgia",
+        ginterests: "male",
+        interests: ['clubing', 'hiking', 'rap', 'comedy']
+      });
+      await wuserrrs.save();
+
+      const mlks = new Malike({
+        _id: userrrs._id
+      });
+      await mlks.save();
+
+      const wlks = new Wolike({
+        _id: wuserrrs._id
+      });
+      await wlks.save();
+
+      const res = await request(app)
+        .post("/api/profiles/matchR")
+        .send({
+          mid: '12',
+          wid: '23'
+        });
+      const data = res.body;
+      expect(res.status).to.equal(400);
+      
+    });
+
+
+    it("Should not be a match for male user", async () => {
+
+      const userrrz = new Male({
+        name: "Brad",
+        username: "brad@gmail.com",
+        password: "123",
+        gender: "male",
+        age: 23,
+        location: "georgia",
+        ginterests: "female",
+        interests: ['exploring', 'gym', 'pop', 'horror']
+      });
+      await userrrz.save();
+
+      const wuserrrz = new Female({
+        name: "Emma",
+        username: "emma@gmail.com",
+        password: "123",
+        gender: "female",
+        age: 23,
+        location: "georgia",
+        ginterests: "male",
+        interests: ['clubing', 'hiking', 'rap', 'comedy']
+      });
+      await wuserrrz.save();
+
+      const mlkz = new Malike({
+        _id: userrrz._id
+      });
+      await mlkz.save();
+
+      const wlkz = new Wolike({
+        _id: wuserrrz._id
+      });
+      await wlkz.save();
+
+      const res = await request(app)
+        .post("/api/profiles/matchR")
+        .send({
+          mid: userrrz._id,
+          wid: wuserrrz._id
+        });
+      const data = res.body;
+      expect(res.status).to.equal(200);
+      expect(data).to.have.property("emsg", "not Match");
+    });
+
+
+
+
+  });
+
+
+
+
+
+
+
+  describe("POST /dislike", () => {
+    it("Should dislike user, no match it is", async () => {
+
+      const userrre = new Male({
+        name: "Brad",
+        username: "brad@gmail.com",
+        password: "123",
+        gender: "male",
+        age: 23,
+        location: "georgia",
+        ginterests: "female",
+        interests: ['clubing', 'hiking', 'rap', 'comedy']
+      });
+      await userrre.save();
+
+      const wuserrre = new Female({
+        name: "Emma",
+        username: "emma@gmail.com",
+        password: "123",
+        gender: "female",
+        age: 23,
+        location: "georgia",
+        ginterests: "male",
+        interests: ['clubing', 'hiking', 'rap', 'comedy']
+      });
+      await wuserrre.save();
+
+      const mlke = new Malike({
+        _id: userrre._id
+      });
+      await mlke.save();
+
+      const wlke = new Wolike({
+        _id: wuserrre._id
+      });
+      await wlke.save();
+
+      const res = await request(app)
+        .post("/api/profiles/dislike")
+        .send({
+          mid: userrre._id,
+          wid: wuserrre._id
+        });
+      const data = res.body;
+      expect(res.status).to.equal(200);
+      expect(data).to.have.property("rate", "0");
+    });
+
+
+    it("Should return error if id is not objectid", async () => {
+
+      const userrrss = new Male({
+        name: "Brad",
+        username: "brad@gmail.com",
+        password: "123",
+        gender: "male",
+        age: 23,
+        location: "georgia",
+        ginterests: "female",
+        interests: ['clubing', 'hiking', 'rap', 'comedy']
+      });
+      await userrrss.save();
+
+      const wuserrrss = new Female({
+        name: "Emma",
+        username: "emma@gmail.com",
+        password: "123",
+        gender: "female",
+        age: 23,
+        location: "georgia",
+        ginterests: "male",
+        interests: ['clubing', 'hiking', 'rap', 'comedy']
+      });
+      await wuserrrss.save();
+
+      const mlkss = new Malike({
+        _id: userrrss._id
+      });
+      await mlkss.save();
+
+      const wlkss = new Wolike({
+        _id: wuserrrss._id
+      });
+      await wlkss.save();
+
+      const res = await request(app)
+        .post("/api/profiles/dislike")
+        .send({
+          mid: '12',
+          wid: '23'
+        });
+      const data = res.body;
+      expect(res.status).to.equal(400);
+      
+    });
+
+
+  
+
+
+
+
+  });
+
+
+
+
+
+
+
+  describe("POST /mcards", () => {
+    it("Should retrieve all female profiles that are unseen", async () => {
+
+      const userrre = new Male({
+        name: "Brad",
+        username: "brad@gmail.com",
+        password: "123",
+        gender: "male",
+        age: 23,
+        location: "georgia",
+        ginterests: "female",
+        interests: ['clubing', 'hiking', 'rap', 'comedy']
+      });
+      await userrre.save();
+
+      const wuserrre = new Female({
+        name: "Emma",
+        username: "emma@gmail.com",
+        password: "123",
+        gender: "female",
+        age: 23,
+        location: "georgia",
+        ginterests: "male",
+        interests: ['clubing', 'hiking', 'rap', 'comedy']
+      });
+      await wuserrre.save();
+
+
+      const wuserrree = new Female({
+        name: "jennifer",
+        username: "jennifer@gmail.com",
+        password: "123",
+        gender: "female",
+        age: 23,
+        location: "georgia",
+        ginterests: "male",
+        interests: ['clubing', 'hiking', 'rap', 'comedy']
+      });
+      await wuserrree.save();
+
+
+      const mlke = new Malike({
+        _id: userrre._id
+      });
+      await mlke.save();
+
+      const wlke = new Wolike({
+        _id: wuserrre._id
+      });
+      await wlke.save();
+
+      const wlkee = new Wolike({
+        _id: wuserrree._id
+      });
+      await wlkee.save();
+
+
+      await Malike.findOneAndUpdate({_id: userrre._id}, {$push: {women: [{wid: wuserrre._id, seen: "N", rate: 4}]}}).exec();
+
+      const res = await request(app)
+        .post("/api/profiles/mcards")
+        .send({
+          mid: userrre._id
+        });
+      const data = res.body;
+      expect(res.status).to.equal(200);
+      expect(data).to.have.property("msg", "Done");
+    });
+
+
+    it("Should give 400 status", async () => {
+
+      const userrre = new Male({
+        name: "Brad",
+        username: "brad@gmail.com",
+        password: "123",
+        gender: "male",
+        age: 23,
+        location: "georgia",
+        ginterests: "female",
+        interests: ['clubing', 'hiking', 'rap', 'comedy']
+      });
+      await userrre.save();
+
+      const wuserrre = new Female({
+        name: "Emma",
+        username: "emma@gmail.com",
+        password: "123",
+        gender: "female",
+        age: 23,
+        location: "georgia",
+        ginterests: "male",
+        interests: ['clubing', 'hiking', 'rap', 'comedy']
+      });
+      await wuserrre.save();
+
+
+      const wuserrree = new Female({
+        name: "jennifer",
+        username: "jennifer@gmail.com",
+        password: "123",
+        gender: "female",
+        age: 23,
+        location: "georgia",
+        ginterests: "male",
+        interests: ['clubing', 'hiking', 'rap', 'comedy']
+      });
+      await wuserrree.save();
+
+
+      const mlke = new Malike({
+        _id: userrre._id
+      });
+      await mlke.save();
+
+      const wlke = new Wolike({
+        _id: wuserrre._id
+      });
+      await wlke.save();
+
+      const wlkee = new Wolike({
+        _id: wuserrree._id
+      });
+      await wlkee.save();
+
+
+      await Malike.findOneAndUpdate({_id: userrre._id}, {$push: {women: [{wid: wuserrre._id, seen: "N", rate: 4}]}}).exec();
+
+      const res = await request(app)
+        .post("/api/profiles/mcards")
+        .send({
+          mid: '12'
+        });
+      const data = res.body;
+      expect(res.status).to.equal(400);
+    });
+
+
+  
+
+
+
+
+  });
+
+
+
+
+  describe("POST /wcards", () => {
+    it("Should retrieve all male profiles that are unseen", async () => {
+
+      const wuserrred = new Female({
+        name: "Emma",
+        username: "emma@gmail.com",
+        password: "123",
+        gender: "female",
+        age: 23,
+        location: "georgia",
+        ginterests: "male",
+        interests: ['clubing', 'hiking', 'rap', 'comedy']
+      });
+      await wuserrred.save();
+
+
+      const muserrree = new Male({
+        name: "amin",
+        username: "amin@gmail.com",
+        password: "123",
+        gender: "male",
+        age: 23,
+        location: "georgia",
+        ginterests: "male",
+        interests: ['clubing', 'hiking', 'rap', 'comedy']
+      });
+      await muserrree.save();
+
+      const muserrre = new Male({
+        name: "Brad",
+        username: "brad@gmail.com",
+        password: "123",
+        gender: "male",
+        age: 23,
+        location: "georgia",
+        ginterests: "female",
+        interests: ['clubing', 'hiking', 'rap', 'comedy']
+      });
+      await muserrre.save();
+
+
+      const wlke = new Wolike({
+        _id: wuserrred._id
+      });
+      await wlke.save();
+
+      const mlkee = new Malike({
+        _id: muserrree._id
+      });
+      await mlkee.save();
+
+      const mlke = new Malike({
+        _id: muserrre._id
+      });
+      await mlke.save();
+
+      await Wolike.findOneAndUpdate({_id: wuserrred._id}, {$push: {men: [{mid: muserrree._id, seen: "N", rate: 4}]}}).exec();
+
+      const res = await request(app)
+        .post("/api/profiles/wcards")
+        .send({
+          wid: wuserrred._id
+        });
+      const data = res.body;
+      expect(res.status).to.equal(200);
+      expect(data).to.have.property("msg", "Done");
+    });
+
+
+    it("Should give 400 status", async () => {
+
+      const wuserrred = new Female({
+        name: "Emma",
+        username: "emma@gmail.com",
+        password: "123",
+        gender: "female",
+        age: 23,
+        location: "georgia",
+        ginterests: "male",
+        interests: ['clubing', 'hiking', 'rap', 'comedy']
+      });
+      await wuserrred.save();
+
+
+      const muserrree = new Male({
+        name: "amin",
+        username: "amin@gmail.com",
+        password: "123",
+        gender: "male",
+        age: 23,
+        location: "georgia",
+        ginterests: "male",
+        interests: ['clubing', 'hiking', 'rap', 'comedy']
+      });
+      await muserrree.save();
+
+      const muserrre = new Male({
+        name: "Brad",
+        username: "brad@gmail.com",
+        password: "123",
+        gender: "male",
+        age: 23,
+        location: "georgia",
+        ginterests: "female",
+        interests: ['clubing', 'hiking', 'rap', 'comedy']
+      });
+      await muserrre.save();
+
+
+      const wlke = new Wolike({
+        _id: wuserrred._id
+      });
+      await wlke.save();
+
+      const mlkee = new Malike({
+        _id: muserrree._id
+      });
+      await mlkee.save();
+
+      const mlke = new Malike({
+        _id: muserrre._id
+      });
+      await mlke.save();
+
+      await Wolike.findOneAndUpdate({_id: wuserrred._id}, {$push: {men: [{mid: muserrree._id, seen: "N", rate: 4}]}}).exec();
+
+
+      const res = await request(app)
+        .post("/api/profiles/wcards")
+        .send({
+          wid: '12'
+        });
+      expect(res.status).to.equal(400);
+
+    });
+
+
+  });
+
+
+
+
+  describe("POST /removeUser", () => {
+    it("should check if user is male before removing user profile from DB", async () => {
+
+
+      const user = new Profile({
+        name: "mehrad",
+        username: "mehrad@gmail.com",
+        password: "344",
+        gender: "male",
+        age: 23,
+        location: "california",
+        ginterests: "female"
+      });
+      await user.save();
+
+      const muserrre = new Male({
+        _id: user._id,
+        name: "mehrad",
+        username: "mehrad@gmail.com",
+        password: "344",
+        gender: "male",
+        age: 23,
+        location: "california",
+        ginterests: "female"
+      });
+      await muserrre.save();
+
+
+      const res = await request(app)
+        .post("/api/profiles/removeUser")
+        .send({
+          uid: user._id
+        });
+      const data = res.body;
+      expect(res.status).to.equal(200);
+      expect(data).to.have.property("msg", "Done");
+
+    });
+
+
+    it("should check if user is female before removing user profile from DB", async () => {
+
+
+      const user = new Profile({
+        name: "karen",
+        username: "karen@gmail.com",
+        password: "344",
+        gender: "female",
+        age: 23,
+        location: "california",
+        ginterests: "male"
+      });
+      await user.save();
+
+      const muserrre = new Female({
+        _id: user._id,
+        name: "karen",
+        username: "karen@gmail.com",
+        password: "344",
+        gender: "female",
+        age: 23,
+        location: "california",
+        ginterests: "male"
+      });
+      await muserrre.save();
+
+
+      const res = await request(app)
+        .post("/api/profiles/removeUser")
+        .send({
+          uid: user._id
+        });
+      const data = res.body;
+      expect(res.status).to.equal(200);
+      expect(data).to.have.property("msg", "Done");
+
+    });
+
+
+    it("should return 400 status", async () => {
+
+
+
+      const res = await request(app)
+        .post("/api/profiles/removeUser")
+        .send({
+          uid: '12'
+        });
+      const data = res.body;
+      expect(res.status).to.equal(400);
+
+    });
+
+
+  });
+
+
+
+
 
 });

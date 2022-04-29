@@ -1,5 +1,5 @@
 const mongoose = require("mongoose");
-const { Profile, Male, Female } = require("../models/user.model");
+const { Profile, Male, Female, Malike, Wolike } = require("../models/user.model");
 
 module.exports.getAllUsers = async (req, res) => {
   let users = await Profile.find({});
@@ -104,6 +104,108 @@ module.exports.addBio = async (req, res) => {
     var femaleUser = await Female.findOneAndUpdate({_id: req.params.id}, {$set: {bio: req.body.bio}}).exec();
     return res.send(femaleUser);
   }
+  
+ 
+};
+
+module.exports.addMatch = async (req, res) => {
+
+  if (!mongoose.Types.ObjectId.isValid(req.body.mid))
+    return res.status(400).send("Invalid object id");
+  const getMards = await Male.findById(req.body.mid);
+  const getZans = await Female.findById(req.body.wid);
+  const mattrs = getMards.interests;
+  const wattrs = getZans.interests;
+
+  const common_atrs = mattrs.filter(x => wattrs.indexOf(x) !== -1);
+  if(common_atrs.length > 3){
+    const mforM = await Wolike.findOneAndUpdate({_id: req.body.wid}, {$push: {men: [{mid: req.body.mid, seen: "N", rate: common_atrs.length}]}});
+  }
+
+    const mardLikez = await Malike.findOneAndUpdate({_id: req.body.mid}, {$push: {women: [{wid: req.body.wid, seen: "N", rate: common_atrs.length}]}});
+
+    if(common_atrs.length < 3){
+      return res.send({emsg: "not Match"});
+    }
+    else if(common_atrs.length > 3){
+      return res.send({msg: "Match"});
+    }
+    
+  
+ 
+};
+
+module.exports.noMatch = async (req, res) => {
+
+  if (!mongoose.Types.ObjectId.isValid(req.body.mid))
+    return res.status(400).send("Invalid object id");
+  const mdsl = await Malike.findOneAndUpdate({_id: req.body.mid}, {$push: {women: [{wid: req.body.wid, seen: "N", rate: 0}]}});
+  const mwdsl = await Wolike.findOneAndUpdate({_id: req.body.wid}, {$push: {men: [{mid: req.body.mid, seen: "N", rate: 0}]}});
+
+  return res.send({rate: "0"});
+    
+  
+ 
+};
+
+
+
+module.exports.getWcards = async (req, res) => {
+
+  if (!mongoose.Types.ObjectId.isValid(req.body.mid))
+    return res.status(400).send("Invalid object id");
+  const findHisLikes = await Malike.findById(req.body.mid).exec();
+  const filterProf = [];
+  findHisLikes.women.forEach(function(reslt){
+      filterProf.push(reslt.wid);
+  });
+
+  const getWpro = await Female.find({'_id': {$nin: filterProf}}).limit(1).exec();
+  
+
+  return res.send({msg: "Done"});
+    
+  
+ 
+};
+
+
+
+module.exports.getMcards = async (req, res) => {
+
+  if (!mongoose.Types.ObjectId.isValid(req.body.wid))
+    return res.status(400).send("Invalid object id");
+  const findHerLikes = await Wolike.findById(req.body.wid).exec();
+  const filterProfs = [];
+  findHerLikes.men.forEach(function(reslt){
+      filterProfs.push(reslt.mid);
+  });
+
+  const getWpros = await Male.find({'_id': {$nin: filterProfs}}).limit(1).exec();
+  
+
+  return res.send({msg: "Done"});
+    
+  
+ 
+};
+
+
+module.exports.rmvUser = async (req, res) => {
+
+  if (!mongoose.Types.ObjectId.isValid(req.body.uid))
+    return res.status(400).send("Invalid object id");
+
+    const chkg = await Profile.findById(req.body.uid).exec();
+    if(chkg.gender == "male"){
+        await Male.findByIdAndDelete(req.body.uid).exec();
+    } else {
+        await Female.findByIdAndDelete(req.body.uid).exec();
+    } 
+  
+
+  return res.send({msg: "Done"});
+    
   
  
 };
