@@ -392,6 +392,15 @@ app.post("/cards", async (req, res) => {
     }
 });
 
+app.post("/main", async (req, res) => {
+
+    const vldgnz = await Profile.findById(req.user.id).exec();
+    if(vldgnz.gender == "male"){
+        res.redirect("/male");
+    } else {
+        res.redirect("/female");
+    }
+});
 
 app.post('/upimg', upload.single('imagez'), async (req, res) => {
     const uploadedFile = req.file.location;
