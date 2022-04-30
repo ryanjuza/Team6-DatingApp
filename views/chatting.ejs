@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Chat Section</title>
+
+        <!-- Bootstrap CSS -->
+        <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+    </head>
+    <body>
+
+        
+        <div class="container-fluid">
+            <% urChat.forEach(function(items) { %>
+                <p>You: <%= items %></p>
+                <% }) %>
+
+                <hr>
+                <% tgChat.forEach(function(itemsz) { %>
+                    <p>Your Friend: <%= itemsz %></p>
+                    <% }) %>
+
+                    <hr>
+
+            <ul class="list-group" id="messages"></ul>
+            
+        </div>
+        <div style="position: fixed; bottom:0;width:100vw;">
+            <form action="">
+                <input id="rmId" value="<%= roomNum %>" hidden>
+                <input id="fname" value="<%= usrName %>" hidden>
+                <input type="text" name="" id="m" class="form-control" placeholder="Enter the message..." value="" required="required" title="" style="background:rgb(34, 20, 48);color:white;">
+                <button>Send</button>
+            </form>
+        </div>
+        <!-- jQuery -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+        <!-- Bootstrap JavaScript -->
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+        <script src="/socket.io/socket.io.js"></script>
+        <script>
+            var socket = io();
+            const fnm = $('#fname').val() + ":" + " ";
+            $('form').submit(function(){
+                var msg = $('#m').val();
+                var romId = $('#rmId').val();
+                var trId = $('#tgId').val();
+                var namez = $("#fname").val();
+                $.post('http://localhost:3000/addchat', {chatId: romId, mesg: msg});
+                if(msg.length > 0)
+                    socket.emit('chat message', {name: namez, chat: msg});
+                else
+                    console.log("Enter a valid msg :");
+                $('#m').val("");
+                return false;
+            });
+            socket.on('chat message', function(data){
+                const rslt = data.name + ":" + " " + data.chat;
+                $("#messages").append('<li class="list-group-item">'+rslt+'</li>');
+
+            });
+        </script>
+    </body>
+</html>

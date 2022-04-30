@@ -1,59 +1,139 @@
-
+<!DOCTYPE html>
 <html>
-
-<head>
-    <meta charset="utf-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Matches</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <link rel="stylesheet" type="text/css" media="screen" href="css/mcards.css" />
+    <head>
+        <title>Matches</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700" type="text/css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="css/mcards.css" />
 </head>
-
 <body>
 
+<div class="sidebar">
+  <div class="profile">
+    <span class="owner">DateApp</span>
+  </div>
+  <ul class="nav">
+    <li class=active>
+      <form action="/main" method="post">
+        <button type="submit" class="abt">Home</button>
+      </form>
+      
+    </li>
+    <li class=active>
+      <form action="/matchm" method="post">
+        <button type="submit" class="abt">Matches</button>
+      </form>
+      
+    </li>
+    <li class=active>
+      <form action="/hom" method="post">
+        <button type="submit" class="abt">Dashboard</button>
+      </form>
+      
+    </li>
 
-<h1 style="text-align: center;">Matches</h1>
-
-<div class="container">
-  <% matchInf.forEach(function(items) { %>
-
-    <div class="wrapper">
-      <div class="img-area">
-        <div class="inner-area">
-          <img src="<%= items.pict %>" alt="">
-        </div>
-      </div>
-  
-      <div class="name"><%= items.name %> </div>
-      <div class="about">
-        <%= items.bio %>
-   </div>
-   <table>
-    <tr>
-      <th>
-        <%= items.age %>
-      </th>
-      <th>
-        <%= items.gender %>
-      </th> 
-      <th>
-        <%= items.location %>
-      </th>
-    </tr>
-  </table>
-      <div class="buttons">
-        <button>Message</button>
-        <button>View Profile</button>
-      </div>
-  
-    </div>
-
- <% }) %>
-
+    <li class="btmn">
+      <form action="/logout" method="post">
+        <button type="submit" class="btt">Logout</button>
+      </form>
+    </li>
+  </ul>
 </div>
 
+<button class="toggle-button">
+  <i class="fa fa-bars"></i>
+  <i class="fa fa-arrows-alt"></i>
+</button>
 
-</body>
 
+
+
+<article>
+  <div class="container">
+   
+   
+    <div class="containerzz">
+     
+      <% matchInf.forEach(function(items) { %>
+    
+        <div class="wrapper">
+          <div class="img-area">
+            <div class="inner-area">
+              <img src="<%= items.pict %>" alt="">
+            </div>
+          </div>
+      
+          <div class="name"><%= items.name %> </div>
+          <div class="about">
+            <%= items.bio %>
+       </div>
+
+       <table>
+        <tr>
+          <th>
+            <%= items.age %>
+          </th>
+          <th>
+            <%= items.gender %>
+          </th> 
+          <th>
+            <%= items.location %>
+          </th>
+        </tr>
+      </table>
+
+          <div class="buttons">
+            <form action="/chatting" method="get">
+              <input name="wid" value="<%= items._id %>" hidden>
+              <button class="botonz" type="submit">Message</button>
+            </form>
+            
+          </div>
+      
+        </div>
+        <% }) %>
+    
+    </div>
+
+
+
+  
+  </div>
+  
+</article>
+
+   
+  
+
+
+
+
+  <script>
+
+
+    
+    
+
+
+
+    $(".toggle-button").on("click", function(){
+      $(".sidebar").toggleClass("active")
+      if ($(".sidebar").hasClass("active"))
+        {
+          $("body").addClass("non-margin")
+        } else {
+          $("body").removeClass("non-margin")
+        }
+    })
+
+
+
+  </script>
+
+    </body>
 </html>
+
+
