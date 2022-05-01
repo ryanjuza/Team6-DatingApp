@@ -57,7 +57,7 @@
 
 
 
-        <% herInfos.forEach(function(itemsz) { %>
+        <% hisInfos.forEach(function(itemsz) { %>
           
           <div class="crs">
             <input type="radio" name="Carrusel" id="Slider1" checked>
@@ -107,11 +107,11 @@
 
         <div class="card__action">
 
-          <form action="/dislike" method="POST">
+          <form action="/wdislike" method="POST">
             <button type="submit" class="card__action__button card__action--message" name="rejc" value="<%= itemsz._id %>" onchange="this.form.submit()"><i class="fa fa-thumbs-down" aria-hidden="true"></i></button>
           </form>
 
-          <form action="/z" method="POST">
+          <form action="/wlikes" method="POST">
             <button type="submit" class="card__action__button card__action--follow" name="addT" value="<%= itemsz._id %>" onchange="this.form.submit()"><i class="fa fa-thumbs-up" aria-hidden="true"></i></button>
         </form>
           
