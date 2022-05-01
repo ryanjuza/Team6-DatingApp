@@ -485,8 +485,8 @@ app.post("/dislike", async (req, res) => {
 });
 
 app.post("/wdislike", async (req, res) => {
-    const wdsl = await Flike.findOneAndUpdate({_id: req.user.id}, {$push: {men: [{mid: req.body.wrejc, seen: "N", rate: 0}]}});
-    const wmdsl = await Like.findOneAndUpdate({_id: req.body.wrejc}, {$push: {women: [{wid: req.user.id, seen: "N", rate: 0}]}});
+    const wdsl = await Flike.findOneAndUpdate({_id: req.user.id}, {$push: {men: [{mid: req.body.rejc, seen: "N", rate: 0}]}});
+    const wmdsl = await Like.findOneAndUpdate({_id: req.body.rejc}, {$push: {women: [{wid: req.user.id, seen: "N", rate: 0}]}});
     res.redirect("/female");
 });
 
