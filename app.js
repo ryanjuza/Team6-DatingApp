@@ -4,13 +4,20 @@ const mongoose = require("mongoose");
 // const { MongoClient } = require('mongodb');
 const ejs = require("ejs");
 const axios = require('axios');
+const cors = require('cors');
+var jsdom = require("jsdom");
+const { JSDOM } = jsdom;
+const { window } = new JSDOM();
+const { document } = (new JSDOM('')).window;
+global.document = document;
+var $ = require("jquery")(window);
 const session = require("express-session");
 const passport = require("passport");
 const passportLocalMongoose = require("passport-local-mongoose");
 const encrypt = require("mongoose-encryption");
 const async = require("async");
 const https = require('https');
-const cors = require('cors');
+
 const path = require('path');
 const uuid = require('uuid').v4;
 const multer = require('multer');
@@ -142,7 +149,7 @@ const mchSchema = new mongoose.Schema({
 
 const chatSchema = new mongoose.Schema({
     mid: {type: mongoose.Schema.Types.ObjectId, ref: 'mSchema'},
-    wid: {type: mongoose.Schema.Types.ObjectId, ref: 'wchema'},
+    wid: {type: mongoose.Schema.Types.ObjectId, ref: 'wSchema'},
     room: String,
     msg: []
 
@@ -190,7 +197,7 @@ io.on('connection', (socket)=>{
 
 
 
-app.post("/addchat", async (req, res) => {
+app.post("/addmsg", async (req, res) => {
     const chekgdsz = await Profile.findById(req.user.id).exec();
 
     if(chekgdsz.gender == "male"){
@@ -206,7 +213,7 @@ app.post("/addchat", async (req, res) => {
 });
 
 
-app.get('/chatting', async (req, res) =>{
+app.get('/chat', async (req, res) =>{
     const umId = req.user.id.toString();
     const uwId = req.query.wid.toString();
     let mroomIds = '';
@@ -600,7 +607,7 @@ app.get("/wcards", async (req, res) => {
 
     const getMatchInfoms = await Mprofile.find({'_id': {$in: arrayzms}}).exec();
 
-    res.render("wcards", {matchInf: getMatchInfoms});
+    res.render("wcards", {userMatch: getMatchInfoms});
 });
 
 

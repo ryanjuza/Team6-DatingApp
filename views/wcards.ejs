@@ -13,8 +13,7 @@
 
 <div class="sidebar">
   <div class="profile">
-    <span class="owner">Hello</span>
-    <span class="roll">123</span>
+    <span class="owner">DateApp</span>
   </div>
   <ul class="nav">
     <li class=active>
@@ -58,7 +57,7 @@
    
     <div class="containerzz">
      
-      <% matchInf.forEach(function(items) { %>
+      <% userMatch.forEach(function(items) { %>
     
         <div class="wrapper">
           <div class="img-area">
@@ -87,7 +86,7 @@
       </table>
 
           <div class="buttons">
-            <form action="/chatting" method="get">
+            <form action="/chat" method="get">
               <input name="wid" value="<%= items._id %>" hidden>
               <button class="botonz" type="submit">Message</button>
             </form>

@@ -48,7 +48,7 @@
                 var romId = $('#rmId').val();
                 var trId = $('#tgId').val();
                 var namez = $("#fname").val();
-                $.post('http://localhost:3000/addchat', {chatId: romId, mesg: msg});
+                $.post('http://localhost:3000/addmsg', {chatId: romId, mesg: msg});
                 if(msg.length > 0)
                     socket.emit('chat message', {name: namez, chat: msg});
                 else
