@@ -327,14 +327,26 @@ app.get("/dashboard", async (req, res) => {
     const mainPic = [];
     if(profUinfo.gender == "male"){
         const minfz = await Mprofile.findById(req.user.id).exec();
-        mainPic.push(minfz.pict);
+        if(minfz.pict){
+            mainPic.push(minfz.pict);
+        }
+        if(!minfz.pict){
+            mainPic.push("https://datingappimages.s3.us-east-2.amazonaws.com/bkg.JPG");
+        }
+        
         minfz.pics.forEach(function(imgs){
             profpz.push(imgs);
         });
 
     } else {
         const winfz = await Wprofile.findById(req.user.id).exec();
-        mainPic.push(winfz.pict);
+        if(winfz.pict){
+            mainPic.push(winfz.pict);
+        }
+        if(!winfz.pict){
+            mainPic.push("https://datingappimages.s3.us-east-2.amazonaws.com/bkg.JPG");
+        }
+        
         winfz.pics.forEach(function(itmz){
             profpz.push(itmz)
         });
