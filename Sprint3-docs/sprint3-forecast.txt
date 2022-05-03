@@ -1,0 +1,3 @@
+Rationale for story points forecast:
+
+Now that we have 2 sprints completed, we can do the "Yesterday's Weather" method of forecasting the sprint. Last sprint we completed 12 story points for our tasks. We have a few more days this sprint, however. If we were to estimate 12 points again, there is a 70% change we would be right. But given the extra days, and also that it is the end of the project, we will forecast the remaining story points needed to finish the project: 15.
