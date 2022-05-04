@@ -1,20 +1,39 @@
--> Daily Scrum Meeting:
+-> Daily Scrum Meeting: 
 
-Ryan -  (1) Assigned new requirements and tasks to the team members in the last 24 hrs. (2) For the next 24 hrs, my plan is to manage the project progress on . Will also work on the TDD and unit testing. 
+ 
 
-Reza - (1) Explored different approaches for implementing the matching algorithm with James. (2) For the next 24 hrs, I’m going to implement the matching algorithm using node.js and python for result comparison.
+Ryan -  (1) Assigned new requirements and tasks to the team members in the last 24 hrs. (2) For the next 24 hrs, my plan is to manage the project progress on . Will also work on the TDD and unit testing with James and Reza.  
 
-James - (1) Worked with Reza in researching on a proper approach to implement the matching algorithm. (2) Going to work with Bindu on designing and implementing profile cards for next 24 hrs.
+ 
 
-Bindu - (1) Demonstrated few ideas on the profile card design features to the team. (2) Going to create a profile card as a sample to get the team’s feedback, along with James.
+Reza - (1) provided few details on creating chat functionality using web socket. (2) For the next 24 hrs, I’m going to implement the chat functionality using socket.io and jQuery. Will also work with Ryan and James on testing the chat functionality. 
 
-Naike - (1) modified and re-designed the profile dashboard for more improvements(2) Going to continue improving and implementing the profile dashboard for the next 24 hrs. I will also work with James and Bindu on creating and designing profile and matching cards.
+ 
 
--> Impediment (For all the team members' tasks):
+James - (1) Worked with Reza in gathering initial details for implementing the chat section. (2) Going to work with Reza on implementing the chat functionality and testing it. 
 
-(3) The team made a good progress and finished the initial tasks in the beginning of the sprint. However, according to the team implementing a high-quality and responsive UI design features for both profile cards and dashboard were the impediments. The team members have planned to input more resources to remove the impediments. 
+ 
 
+Bindu - (1) Demonstrated new design for profile cards and page layout for better responsivity (2) Going to implement and re-design the profile cards and page layout. 
 
--> Evidence:
+ 
 
-We have uploaded evidence for the Daily Scrum meeting in “Sprint2-docs” folder.
+Naike - (1) Demonstrated few chats UI samples to get feedback from the members(2) Going to implement the Chat UI section. 
+
+ 
+
+-> Impediment (For all the team members' tasks): 
+
+ 
+
+(3) The team made sufficient improvements in terms of UI design and web app design layout. Most importantly, the chat functionality was successfully implemented as it was one of the project risks which demonstrates the good risk management of the team. However, there were more features to be added to chat component for advancing it but due to shortage of time and resources, the team decided to build the core functionality of chat as it was the main requirement. 
+
+ 
+
+ 
+
+-> Evidence: 
+
+ 
+
+We have uploaded evidence for the Daily Scrum meeting in “Sprint3-docs” folder. 
