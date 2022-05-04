@@ -1,0 +1,20 @@
+-> Daily Scrum Meeting:
+
+Ryan -  (1) Assigned new requirements and tasks to the team members in the last 24 hrs. (2) For the next 24 hrs, my plan is to manage the project progress on . Will also work on the TDD and unit testing. 
+
+Reza - (1) Explored different approaches for implementing the matching algorithm with James. (2) For the next 24 hrs, I’m going to implement the matching algorithm using node.js and python for result comparison.
+
+James - (1) Worked with Reza in researching on a proper approach to implement the matching algorithm. (2) Going to work with Bindu on designing and implementing profile cards for next 24 hrs.
+
+Bindu - (1) Demonstrated few ideas on the profile card design features to the team. (2) Going to create a profile card as a sample to get the team’s feedback, along with James.
+
+Naike - (1) modified and re-designed the profile dashboard for more improvements(2) Going to continue improving and implementing the profile dashboard for the next 24 hrs. I will also work with James and Bindu on creating and designing profile and matching cards.
+
+-> Impediment (For all the team members' tasks):
+
+(3) The team made a good progress and finished the initial tasks in the beginning of the sprint. However, according to the team implementing a high-quality and responsive UI design features for both profile cards and dashboard were the impediments. The team members have planned to input more resources to remove the impediments. 
+
+
+-> Evidence:
+
+We have uploaded evidence for the Daily Scrum meeting in “Sprint2-docs” folder.
