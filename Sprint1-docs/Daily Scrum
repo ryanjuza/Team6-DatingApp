@@ -1,0 +1,16 @@
+
+-> Daily Scrum Meeting (03/20/22):
+
+Ryan -  (1) Set up scrum tools for team to kick off sprint. (2) For next 24 hrs, I’m going to set up another meeting with to gather the team’s progress. Will help Reza & Ryan on determining the suitable Database type for our app
+Reza - (1) worked with James & Ryan to do research on determining the proper Database type. (2) Next 24 hrs, going to design Database and REST APIs with James.
+James - (1) Performed initial research on identifying the suitable database type to be used for our application. (2) Going to design the database with Reza & Ryan for the next 24 hours.
+Bindu - (1) Explored different login/registeration forms for the application. Installed all the required environment and designed the login/registration page. (2) working on the next page where user slecets the adventure preferences accordingly.
+Naike - (1) Researched different profile dashboards to use for our application. Desgined and implemented main features of the profile dashboard and then pushed it to GitHub. (2) working on adding more features to the profile dashboard.
+-> Impediment (For all the team members' tasks):
+
+(3) Photo upload & FB/IG profile connection features are the impediments. However, we will need to push these two features to next sprint as they are not as important as implementing Authentication functionality for this sprint.
+
+
+-> Evidence:
+
+We have uploaded an evidence for the Daily Scrum meeting (03/20/2022) in this repo with JPG file named "DailyScrumScreenshot.JPG"

@@ -1,0 +1,13 @@
+Sprint 1: 29 story points
+
+-> Rationale: 
+
+We used the fibonacci sequence style of story point valuation. With our sprints being one week, there is only so much time to work on complex tasks.
+
+So complex tasks were given a lot of weight in hoping they don't go into the next sprint.
+
+We also estimated how long the project will take based on the given schedule, how many story points it will take (54), and gave the appropriate amount for one sprint (29), while knowing more work will stem from the work we are doing.
+
+Of course this is not perfect down to a single story point, but tasks have varying degrees of complexity, so, especially for a first sprint, an estimate will do.
+
+After the end of the sprint, we will be able to calculate the sprint velocity and better predict next sprint's total story points.

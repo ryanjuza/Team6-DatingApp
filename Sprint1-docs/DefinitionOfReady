@@ -1,0 +1,155 @@
+                                                                    Creating/Setting-Up New Account
+
+User Story:
+
+-> As a user, I want to register for and set-up a new account so that I can access the app’s content.
+
+Additional Details:
+
+-> Users should be able to register for an account using their personal email or by connecting to their Gmail account.
+
+-> Users can set up their account by providing personal information such as biography, gender, age, location, education/university, music & movie genre interests, and hobbies.
+
+Story Points:
+
+-> 13
+
+
+
+                                                                    User Profile Customization
+
+User Story:
+
+-> As a user, I want to customize and update my profile information.
+
+Additional Details:
+
+-> The user should be able to customize or update his/her profile information, such as biography, location, university/college, academic degree, music & movie genres interest, and hobbies.
+
+-> Ability to change account password will also be considered.
+
+Story Points:
+
+-> 8
+
+                                                                    Gender Interest Specification 
+
+User Story:
+
+-> As a user, I want to choose the gender that I’m interested in dating so that I can only see the profiles having the specified gender.
+
+Additional Details:
+
+-> The user needs to select whether he/she is interested in women or men. If the user is interested in men, all user profiles that their gender is male should be rendered to the current user.
+
+Story Points:
+
+-> 3
+
+                                                                    Viewing Users’ Profile Information
+
+User Story:
+
+-> As a user, I want to view people's profile information so that I can determine whether I’m interested in meeting them or not.
+
+Additional Details:
+
+-> The user should be able to view other users’ profile information such as age, location, height, biography, music/movie interests, and hobbies.
+
+Story Points:
+
+-> 5
+
+                                                                    Liking/Rejecting Users’ Profile 
+
+User Story:
+
+-> As a user, I want to like users’ profiles who I’m interested in and reject who I’m not interested in.
+
+Additional Details:
+
+-> User A can decide whether he/she is interested in user B by using “Like” and “Reject/Dislike” buttons.
+
+-> If user A likes user B’s profile, user B’s profile data will be analyzed to determine if he/she is a good match for user A. 
+
+Story Points:
+
+-> 8
+
+                                                                    Finding Matches for Users
+
+User Story:
+
+-> As a user, I want to get matched with people who share the same interests and hobbies as me.
+
+Additional Details:
+
+-> A user should get matched with another user if they both share almost the same attributes such as location, interests, and hobbies.
+
+Story Points:
+
+-> 5
+
+                                                                    New Match Notification 
+
+User Story:
+
+-> As a user, I want to receive a notification when I get matched with a new user.
+
+Additional Details:
+
+- > When a new match has been found for the user, a notification should be sent to the user profile. 
+
+Story Points:
+
+-> 2
+
+                                                                    Sending/Receiving Text Messages
+
+User Story:
+
+-> As a user, I want to send and receive text messages with people who I have got matched with.
+
+Additional Details:
+
+-> Users who were matched should be able to communicate with each other through the app’s chat section.
+
+Story Points:
+
+-> 5
+
+                                                                    Un-matching Profiles
+
+User Story:
+
+-> As a user, I want to unmatch people who I’m no longer interested in meeting or talking to. 
+
+Additional Details:
+
+-> The user should be able to unmatch his/her profile from other users if he/she is not interested. This means the user B profile who is being unmatched should be removed from the user A’s match list.
+
+-> For future improvements and better customer experience, we will ask user A the reason for unmatching himself/herself from user B. This will be optional and users are able to skip this question
+
+Story Points:
+
+-> 2
+
+                                                                    Deleting Profile Account
+
+User Story:
+
+-> As a user, I want to delete my account and profile information permanently.
+
+Additional Details:
+
+-> The user should be able to delete his/her account if no longer interested in using the app.
+
+-> For better customer experience and service improvements, we will ask the user to provide us with feedback regarding their experience with our dating app.
+
+Story Points:
+
+-> 3
+
+
+
+
